@@ -1,0 +1,43 @@
+/*Added by Prajakta*/
+
+.error{
+    color: red !important;
+    width:380px;
+}
+.caps{
+    text-transform: capitalize;
+}
+.result{
+    font-size: 20px;
+    color:green;
+}
+.submit_buttons{
+    padding: 10px;
+    cursor: pointer;
+    border: none;
+    -webkit-appearance: none;
+    border-radius: 10px;
+    width: 120px;
+    font-size: 15px;
+    color: white;
+    font-family: inherit;
+    background-color: rgb(159, 188, 53);
+}
+.cancle{
+    padding: 10px;
+    cursor: pointer;
+    border: none;
+    -webkit-appearance: none;
+    border-radius: 10px;
+    width: 120px;
+    font-size: 15px;
+    color: white;
+    font-family: inherit;
+    background-color: #8c8d89;
+    text-decoration: none !important;
+}
+
+.active{
+    background-color: #9fbc35 !important;
+    border: 1px solid #9fbc35 !important;
+}
