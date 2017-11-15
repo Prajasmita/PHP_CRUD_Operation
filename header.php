@@ -25,9 +25,6 @@
 
 
 
-    <!-- Latest compiled and minified CSS -->
-
-
 
     <!-- jQuery library (served from Google) -->
 

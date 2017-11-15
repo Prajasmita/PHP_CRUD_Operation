@@ -43,7 +43,7 @@ else
         //print_r($id) ;die;*/
 
         // sql query for update data into database
-        $query = "UPDATE category SET name='".$category_name."' where id=".$id;
+        $query = "UPDATE category SET name='".$category_name."' where id=".$id."";
         $fire = mysqli_query($conn,$query) or die("Cannot update");
 
         if($fire){
@@ -83,7 +83,7 @@ require ('header.php');
                         </ul>
                         <div class="next_btn_block">
                             <div class="nextbtn">
-                                <input class="submit_buttons" type="submit" name="submit" value="Update">
+                                <input class="submit_buttons" type="submit" name="update-btn" value="Update">
                                 <!--<span><img src="images/small_triangle.png"  alt="small_triangle"> </span></input>-->
                                 <a href="category_list.php" class="cancle">Cancle</a>
                             </div>

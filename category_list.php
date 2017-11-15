@@ -50,6 +50,7 @@ $result = $conn->query("SELECT * FROM category limit $offset,$limit ");
 ?>
 
 
+
 <?php require ('header.php');?>
 
   <div class="section banner_section who_we_help">
@@ -62,6 +63,7 @@ $result = $conn->query("SELECT * FROM category limit $offset,$limit ");
   <div class="section content_section">
 	<div class="container">
 		<div class="filable_form_container">
+            <form action="delete_bulk_category.php" id="form_delete" method="post">
 			<div class="mange_buttons">
 				<ul>
 					<!--<li class="search_div">
@@ -70,8 +72,12 @@ $result = $conn->query("SELECT * FROM category limit $offset,$limit ");
 				 	<input type="submit" class="submit" value="submit">
 				 </div>
 					</li> -->
-					<li><a href="index.php">Create Category</a></li>
-					<li><a href="#">Delete</a></li>
+					<li><a href="add_category.php">Create Category</a></li>
+					<li>
+
+                            <a href="#"  onclick="deleteConfirm()" id="delete" name="delete" class="btn btn_edit">Delete</a>
+                    </li>
+
 				</ul>
 			</div>
 			<div class="table_container_block">
@@ -79,10 +85,10 @@ $result = $conn->query("SELECT * FROM category limit $offset,$limit ");
 					<thead>
                     <!--<h3><?php /*echo $res*/?></h3>-->
 						<tr>
-						<th width="10%">
-							<input class="checkbox" id="checkbox_sample18" type="checkbox"> <label class="css-label mandatory_checkbox_fildes" for="checkbox_sample18"></label>
-						</th>
-						<th style="width:60%">Name <!--<a href="#" class="sort_icon"><img src="images/sort.png"></a>--></th>
+                            <th width="10%">
+                                <input type="checkbox" class="checkbox" id="bulk_select" /> <label class="css-label mandatory_checkbox_fildes" for="bulk_select"></label>
+                            </th>
+                            <th style="width:60%">Name <!--<a href="#" class="sort_icon"><img src="images/sort.png"></a>--></th>
 						<th>Action</th>
 						</tr>
 					</thead>
@@ -95,9 +101,13 @@ $result = $conn->query("SELECT * FROM category limit $offset,$limit ");
                             */
                             while ($row = mysqli_fetch_assoc($result)){
                    ?>
-                                <tr>
+                                <tr id="<?php echo $row["id"]; ?>">
+
+<!--                                    <td><input name="checkbox[]" type="checkbox" class="checkbox" id="--><?php //echo $row["id"]; ?><!--"></td>-->
+
                                     <td>
-                                        <input class="checkbox" value="<?php echo $row['id'] ?>" id="name" type="checkbox" > <label class="css-label mandatory_checkbox_fildes" for="checkbox_sample19"></label>
+                                        <input type="checkbox" name="checkbox[]" value="<?php echo $row['id'] ?>" class="checkbox" id="checkbox_sample<?php echo $row['id'] ?>" />
+                                        <label class="css-label mandatory_checkbox_fildes" for="checkbox_sample<?php echo $row['id'] ?>"></label>
                                     </td>
                                     <td><?php echo $row['name'];?></td>
                                     <td>
@@ -114,8 +124,8 @@ $result = $conn->query("SELECT * FROM category limit $offset,$limit ");
 					</tbody>
 				</table>
 			</div>
-			
-			<div class="pagination_listing">
+            </form>
+            <div class="pagination_listing">
                <?php
 /*                    $page_query = "SELECT * FROM category ORDER BY id ASC ";
                     $page_result = mysqli_query($conn,$page_query);
@@ -161,6 +171,76 @@ $result = $conn->query("SELECT * FROM category limit $offset,$limit ");
 	</div>		
   </div>
   <!-- Content Section End-->
+
+<!--<script language="JavaScript" type="text/javascript" src="/js/jquery-1.2.6.min.js"></script>
+-->
+
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript">
+
+    function deleteConfirm(){
+        var result = confirm("Are you sure to delete?");
+        if(result){
+//            return true;
+            $("#form_delete").submit();
+        }else{
+            return false;
+        }
+    }
+
+    $(document).ready( function() {
+/*
+        $('#bulk_select').on('click',function(){
+            if(this.checked){
+                $('.checkbox').each(function(){
+                    this.checked = true;
+                });
+            }else{
+                $('.checkbox').each(function(){
+                    this.checked = false;
+                });
+            }
+        });
+*/
+    // select ans deselect all checkbox
+    $('#bulk_select').on('click', function(e) {
+        if($(this).is(':checked',true)) {
+            $(".checkbox").prop('checked', true);
+        }
+        else {
+            $(".checkbox").prop('checked',false);
+        }
+    });
+    });
+</script>
+
+
+<!--<script>
+    // delete selected records
+    $('#delete').on('click', function(e) {
+        var i = [];
+        $(".checkbox:checked").each(function() {
+            category.push($(this).data('id'));
+        });
+        if(category.length <=0) { alert("Please select records."); } else { WRN_PROFILE_DELETE = "Are you sure you want to delete "+(employee.length>1?"these":"this")+" row?";
+            var checked = confirm(WRN_PROFILE_DELETE);
+            if(checked == true) {
+                var selected_values = category.join(",");
+                $.ajax({
+                    type: "POST",
+                    url: "delete_bulk_category.php",
+                    cache:false,
+                    data: 'id='+selected_values,
+                    success: function(response) {
+// remove deleted employee rows
+                        var emp_ids = response.split(",");
+                        for (var i=0; i < emp_ids.length; i++ ) { $("#"+emp_ids[i]).remove(); } } }); } } });
+
+
+</script>-->
+
+
+
 
 
 

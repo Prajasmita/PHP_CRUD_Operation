@@ -2,7 +2,6 @@
 
 // Create connection
 $conn = new mysqli("localhost","root","root","assignment4");
-
 // Check connection
 if ($conn->connect_error)
 {
