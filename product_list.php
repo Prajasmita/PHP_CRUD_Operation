@@ -78,6 +78,7 @@ $total_pages = ceil($total_rows / $limit);
                      </div>
                         </li> -->
                         <li><a href="add_product.php">Add Product</a></li>
+                        <li><a href="category_list.php">Category List</a></li>
                         <li>
 
                             <a href="#"  onclick="deleteConfirm()" id="delete" name="delete" class="btn btn_edit">Delete</a>
@@ -104,9 +105,6 @@ $total_pages = ceil($total_rows / $limit);
                         $query= "SELECT  p.id,p.name,p.image,p.price,c.name as c_name from products p join category c on category_id=c.id limit $offset,$limit ";
                         $products = mysqli_query($conn,$query)or die("cannot fetch");
 
-                        /*if($fire){
-                            echo "we got data";
-                        }*/
 
                         if( mysqli_num_rows($products) > 0){
 
@@ -118,7 +116,7 @@ $total_pages = ceil($total_rows / $limit);
                                         <label class="css-label mandatory_checkbox_fildes" for="checkbox_sample<?php echo $product['id'] ?>"></label>
                                     </td>
                                     <td><?php echo $product['name'] ?></td>
-                                    <td><img src="<?php echo "photo/".$product['image'] ?>"></td>
+                                    <td><img class="image" src="<?php echo "photo/".$product['image'] ?>"></td>
                                     <td><?php echo $product['price'] ?></td>
 
 
