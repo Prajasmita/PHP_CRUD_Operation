@@ -129,11 +129,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update-btn'])) {
                                 <select name="category" value="<?php echo $fetched_row['name']?>" id="categories_id" class="select category">
 
                                     <?php
-                                    $query= "SELECT * FROM category";
+                                    echo $query= "SELECT * FROM category";
+
                                     $result= mysqli_query($conn,$query) or die("cannot fetch data");
                                     while($row = mysqli_fetch_assoc($result)) {
+                                    		$selected = '';
+                                    		if($row['id']==$fetched_row['category_id']){
+                                				$selected = 'selected';
+                                    		}
                                         ?>
-                                        <option value="<?php echo $row['id'] ?>" > <?php echo $row['name'] ?></option>
+                                        <option <?php echo $selected;?> value="<?php echo $row['id'] ?>" > <?php echo $row['name'] ?></option>
 
                                         <?php
                                     }
