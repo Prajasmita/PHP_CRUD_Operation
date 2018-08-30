@@ -149,7 +149,7 @@ $result = $conn->query("SELECT * FROM category limit $offset,$limit ");
                     ?>
                      <li><a href="?page=<?php echo $i; ?>"
 
-                           <?php if (($page == "") || ($_GET['page'] == $i)) {
+                           <?php if (($page == "") || ($page == $i)) {
                          echo ' class="active"';
                          }?>
 
